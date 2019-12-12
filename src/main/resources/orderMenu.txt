@@ -1,0 +1,5 @@
+1. Add lunch to order.
+2. Add drink to order.
+3. Show actual order.
+4. Submit order.
+0. Exit.
