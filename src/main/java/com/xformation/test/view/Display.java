@@ -148,22 +148,22 @@ public class Display {
                 if (drinkId == drink.getId()) {
                     totalPrice += (drink.getPrice() * orderedDrink.getAmount());
                     System.out.println("-->"+drink.getName() + "/" + orderedDrink.getAmount() + "/" + (drink.getPrice() * orderedDrink.getAmount())+"$");
-                    totalPrice = printAllOrderedDrinkAdditives(menu, totalPrice, orderedDrink);
+                    totalPrice = printAllOrderedDrinkAdditives(menu, totalPrice, orderedDrink,  orderedDrink.getAmount());
                 }
             }
         }
         return totalPrice;
     }
 
-    public static int printAllOrderedDrinkAdditives(Menu menu, int totalPrice, OrderDrink orderedDrink) {
+    public static int printAllOrderedDrinkAdditives(Menu menu, int totalPrice, OrderDrink orderedDrink, int amountOfDrinks) {
         List<OrderDrinkAdditive> drinkAdditives = orderedDrink.getListOfAdditives();
         if(orderedDrink.getListOfAdditives().size()>0) {
             for (OrderDrinkAdditive orderedAdditive: drinkAdditives) {
                 int drinkAdditiveId = orderedAdditive.getDrinkAdditiveId();
                 for (MenuItem drinkAdditive : menu.getListOfDrinkAdditives()) {
                     if (drinkAdditiveId == drinkAdditive.getId()) {
-                        totalPrice += drinkAdditive.getPrice();
-                        System.out.println("----->" + drinkAdditive.getName() + "/" + drinkAdditive.getPrice() + "$");
+                        totalPrice += (amountOfDrinks*drinkAdditive.getPrice());
+                        System.out.println("----->" + drinkAdditive.getName() + "/" + (amountOfDrinks*drinkAdditive.getPrice()) + "$");
                     }
 
                 }
