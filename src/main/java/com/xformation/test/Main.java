@@ -1,15 +1,11 @@
 package com.xformation.test;
 
-/**
- * Hello world!
- *
- */
+import com.xformation.test.controller.RootController;
+
 public class Main
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-//        RootController foodOrderingSystem = new RootController();
-//        foodOrderingSystem.run();
+    public static void main( String[] args ) {
+        RootController foodOrderingSystem = new RootController();
+        foodOrderingSystem.run();
     }
 }
