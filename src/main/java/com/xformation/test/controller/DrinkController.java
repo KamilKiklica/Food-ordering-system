@@ -20,12 +20,15 @@ public class DrinkController implements DrinkControllerInterface {
     }
     @Override
     public void setDrinks(){
-        addDrinkToListOfOrderedDrinks();
+        int drinkIdentifier = 1;
+        addDrinkToListOfOrderedDrinks(drinkIdentifier);
+        drinkIdentifier++;
     }
 
     @Override
-    public void addDrinkToListOfOrderedDrinks() {
+    public void addDrinkToListOfOrderedDrinks(int drinkIdentifier) {
         OrderDrink orderDrink = new OrderDrink();
+        orderDrink.setDrinkIdentifier(drinkIdentifier);
         List<OrderDrinkAdditive> listOfDrinkAdditivesForCurrentDrink = new ArrayList<>();
         orderDrink.setOrderNumber(order.getNumberOfOrder());
         int drinkId = Display.askForInt("Select ID of drink:");
@@ -75,7 +78,7 @@ public class DrinkController implements DrinkControllerInterface {
                 drinkAdditiveId = Display.askForInt("Please input correct id of Drink Additive");
             }
             OrderDrinkAdditive orderDrinkAdditive = new OrderDrinkAdditive();
-            orderDrinkAdditive.setOrderNumber(order.getNumberOfOrder());
+            orderDrinkAdditive.setOrderedDrinkIdentifier(orderDrink.getDrinkIdentifier());
             orderDrinkAdditive.setDrinkAdditiveId(drinkAdditiveId);
             listOfDrinkAdditivesForCurrentDrink.add(orderDrinkAdditive);
             orderDrink.setListOfAdditives(listOfDrinkAdditivesForCurrentDrink);

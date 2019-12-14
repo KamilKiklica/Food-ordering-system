@@ -3,6 +3,7 @@ package com.xformation.test.controller;
 import com.xformation.test.controller.Interfaces.OrderControllerInterface;
 import com.xformation.test.model.Menu;
 import com.xformation.test.model.Order;
+import com.xformation.test.model.dao.sql.TransactionQueriesBuilder;
 import com.xformation.test.model.dao.sql.orders.*;
 import com.xformation.test.view.Display;
 
@@ -81,20 +82,18 @@ public class OrderController implements OrderControllerInterface {
     
     private void sendOrder(Order order, int numberOfOrder){
         setNumberOfOrderForAllOrderItems(order, numberOfOrder);
-        new OrderDAO().createNewOrder(order);
-        order.getListOfOrderedDishes().stream().forEach(orderDish -> new OrderDishDAO().createDishOrder(orderDish));
-        order.getListOfOrderedDesserts().stream().forEach(orderDessert -> new OrderDessertDAO().createDessertOrder(orderDessert));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> new OrderDrinkDAO().createDrinkOrder(orderDrink));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> new OrderDrinkAdditivesDAO().createDrinkAdditivesOrder(orderDrinkAdditive)));
-
+        TransactionQueriesBuilder transactionQueriesBuilder = new TransactionQueriesBuilder(order);
+        transactionQueriesBuilder.makeQueriesFromOrder();
+        List<String> queries = transactionQueriesBuilder.getQueriesList();
+        new TransactionDAO().createWholeOrder(queries);
     }
 
     private void setNumberOfOrderForAllOrderItems(Order order, int numberOfOrder) {
         order.getListOfOrderedDishes().stream().forEach(orderDish -> orderDish.setOrderNumber(numberOfOrder));
         order.getListOfOrderedDesserts().stream().forEach(orderDessert -> orderDessert.setOrderNumber(numberOfOrder));
         order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.setOrderNumber(numberOfOrder));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> orderDrinkAdditive.setDrinkId(orderDrink.getDrinkId())));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> orderDrinkAdditive.setOrderNumber(numberOfOrder)));
+//        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> orderDrinkAdditive.setDrinkId(orderDrink.getDrinkId())));
+//        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> orderDrinkAdditive.setOrderNumber(numberOfOrder)));
     }
 
     private void generateRandomOrderNumberBasingOnCurrentAmountOfOrders(Order order, int maxAmountOfOrders){

@@ -46,20 +46,4 @@ public class OrderDAO  {
             System.exit(0);
         }
         return list;    }
-
-    public void createNewOrder(Order order) {
-
-        try (Connection c = new DataSource().getConnection()) {
-            String query = " insert into orders (Order_Number)"
-                    + " values (?)";
-
-            PreparedStatement preparedStmt = c.prepareStatement(query);
-            preparedStmt.setInt(1, order.getNumberOfOrder());
-            preparedStmt.execute();
-
-        } catch (SQLException e) {
-            System.err.println("SQL exception when creating. ");
-            e.printStackTrace();
-        }
-    }
 }

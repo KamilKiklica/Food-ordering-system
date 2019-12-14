@@ -2,41 +2,41 @@ package com.xformation.test.model.orders;
 
 public class OrderDrinkAdditive {
     private int id;
-    private int orderNumber;
     private int drinkAdditiveId;
-    private int drinkId;
+    private int orderedDrinkIdentifier;
 
-    public OrderDrinkAdditive(int id, int orderNumber, int drinkAdditiveId, int drinkId) {
-        this.orderNumber = orderNumber;
+    public OrderDrinkAdditive(int id, int drinkAdditiveId, int orderedDrinkIdentifier) {
+        this.id = id;
         this.drinkAdditiveId = drinkAdditiveId;
-        this.drinkId = drinkId;
+        this.orderedDrinkIdentifier = orderedDrinkIdentifier;
     }
 
     public OrderDrinkAdditive(){
         super();
     }
+
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
-    public int getOrderNumber() {
-        return orderNumber;
-    }
-    public void setOrderNumber(int orderId) {
-        this.orderNumber = orderId;
-    }
+
     public int getDrinkAdditiveId() {
         return drinkAdditiveId;
     }
+
     public void setDrinkAdditiveId(int drinkAdditiveId) {
         this.drinkAdditiveId = drinkAdditiveId;
     }
-    public int getDrinkId() {
-        return drinkId;
+
+    public int getOrderedDrinkIdentifier() {
+        return orderedDrinkIdentifier;
     }
-    public void setDrinkId(int drinkId) {
-        this.drinkId = drinkId;
+
+    public void setOrderedDrinkIdentifier(int orderedDrinkIdentifier) {
+        this.orderedDrinkIdentifier = orderedDrinkIdentifier;
     }
 }

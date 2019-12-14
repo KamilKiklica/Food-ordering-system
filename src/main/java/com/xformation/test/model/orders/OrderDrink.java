@@ -5,11 +5,13 @@ import java.util.List;
 
 public class OrderDrink extends OrderMenuItem {
     private int drinkId;
+    private int drinkIdentifier;
     private List<OrderDrinkAdditive> listOfAdditives;
 
-    public OrderDrink(int id, int orderNumber, int drinkId, int amount) {
+    public OrderDrink(int id,int drinkIdentifier, int orderNumber, int drinkId, int amount) {
         super(id, orderNumber,amount);
         this.drinkId = drinkId;
+        this.drinkIdentifier = drinkIdentifier;
         this.listOfAdditives = new ArrayList<>();
     }
 
@@ -29,4 +31,11 @@ public class OrderDrink extends OrderMenuItem {
         this.listOfAdditives = listOfAdditives;
     }
 
+    public int getDrinkIdentifier() {
+        return drinkIdentifier;
+    }
+
+    public void setDrinkIdentifier(int drinkIdentifier) {
+        this.drinkIdentifier = drinkIdentifier;
+    }
 }
