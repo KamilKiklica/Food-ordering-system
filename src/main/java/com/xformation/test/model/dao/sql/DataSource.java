@@ -40,15 +40,4 @@ public class DataSource {
     }
         return rs;
     }
-
-
-    public void close(){
-        try {
-            con.close();
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -46,7 +46,6 @@ public class LunchController implements LunchControllerInterface {
         }
         int amount = Display.askForInt("How many of those?");
         OrderDish orderDish = new OrderDish();
-        orderDish.setOrderNumber(order.getNumberOfOrder());
         orderDish.setDishId(dishId);
         orderDish.setAmount(amount);
         order.addOrderDishToListOfOrderedDishes(orderDish);
@@ -61,7 +60,6 @@ public class LunchController implements LunchControllerInterface {
         }
         int amount = Display.askForInt("How many of those desserts do you want?");
         OrderDessert orderDessert = new OrderDessert();
-        orderDessert.setOrderNumber(order.getNumberOfOrder());
         orderDessert.setDessertId(dessertId);
         orderDessert.setAmount(amount);
         order.addOrderDessertToListOfOrderedDesserts(orderDessert);

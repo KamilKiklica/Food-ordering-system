@@ -8,8 +8,8 @@ public class OrderDrink extends OrderMenuItem {
     private int drinkIdentifier;
     private List<OrderDrinkAdditive> listOfAdditives;
 
-    public OrderDrink(int id,int drinkIdentifier, int orderNumber, int drinkId, int amount) {
-        super(id, orderNumber,amount);
+    public OrderDrink(int drinkIdentifier, int drinkId, int amount) {
+        super(amount);
         this.drinkId = drinkId;
         this.drinkIdentifier = drinkIdentifier;
         this.listOfAdditives = new ArrayList<>();

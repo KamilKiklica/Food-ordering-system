@@ -30,7 +30,6 @@ public class DrinkController implements DrinkControllerInterface {
         OrderDrink orderDrink = new OrderDrink();
         orderDrink.setDrinkIdentifier(drinkIdentifier);
         List<OrderDrinkAdditive> listOfDrinkAdditivesForCurrentDrink = new ArrayList<>();
-        orderDrink.setOrderNumber(order.getNumberOfOrder());
         int drinkId = Display.askForInt("Select ID of drink:");
         List<Integer> listOfAvailableDinksId = new ArrayList<>();
         addAllAvailableItemOrderIdFromMenuToList(listOfAvailableDinksId, menu.getListOfDrinks());

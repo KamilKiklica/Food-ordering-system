@@ -53,7 +53,7 @@ public class RootController implements RootControllerInterface {
     }
     @Override
     public void showPendingOrders(){
-        List<Order> list = new OrderDAO().read();
+        List<Order> list = new OrderDAO().readListOfOrders();
         Display.showPendingOrders(list);
     }
     @Override

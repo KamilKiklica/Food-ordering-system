@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuisinesDAO {
-
     public List<Cuisine> read() {
-
         List<Cuisine> list = new ArrayList<>();
         try (ResultSet rs = new DataSource().executeQuery("SELECT * FROM CUISINES;")) {
             while(rs.next()){
@@ -20,11 +18,9 @@ public class CuisinesDAO {
                 Cuisine cuisine = new Cuisine(id, name);
                 list.add(cuisine);
             }
-
         } catch (SQLException e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
         return list;    }
-
 }

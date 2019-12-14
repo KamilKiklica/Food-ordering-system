@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkAdditivesDAO {
-
     public List<MenuItem> read() {
-
         List<MenuItem> list = new ArrayList<>();
         try (ResultSet rs = new DataSource().executeQuery("SELECT * FROM Drink_Additives;")) {
             while(rs.next()){
@@ -22,7 +20,6 @@ public class DrinkAdditivesDAO {
                 MenuItem drinkAdditive = new DrinkAdditives(id,name,price);
                 list.add(drinkAdditive);
             }
-
         } catch (SQLException e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);

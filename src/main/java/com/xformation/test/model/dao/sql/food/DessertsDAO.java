@@ -9,9 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DessertsDAO{
+public class DessertsDAO {
     public List<MenuItem> read() {
-
         List<MenuItem> list = new ArrayList<>();
         try (ResultSet rs = new DataSource().executeQuery("SELECT * FROM DESSERTS;")) {
             while(rs.next()){
@@ -21,7 +20,6 @@ public class DessertsDAO{
                 MenuItem dessert = new Dessert(id,name,price);
                 list.add(dessert);
             }
-
         } catch (SQLException e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
