@@ -3,12 +3,12 @@ package com.xformation.test.model.food;
 import java.util.List;
 
 public class Cuisine {
-    private int Id;
+    private int id;
     private String nameOfCuisine;
     private List<MenuItem> listOfDishes;
 
-    public Cuisine(int Id, String nameOfCuisine) {
-        this.Id = Id;
+    public Cuisine(int id, String nameOfCuisine) {
+        this.id = id;
         this.nameOfCuisine = nameOfCuisine;
     }
 
@@ -17,11 +17,11 @@ public class Cuisine {
     }
 
     public int getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public List<MenuItem> getListOfDishes() {

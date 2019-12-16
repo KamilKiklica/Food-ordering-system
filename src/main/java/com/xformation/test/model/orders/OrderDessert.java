@@ -13,8 +13,5 @@ public class OrderDessert extends OrderMenuItem{
     public int getDessertId() {
         return this.dessertId;
     }
-    public void setDessertId(int dessertId) {
-        this.dessertId = dessertId;
-    }
 
 }

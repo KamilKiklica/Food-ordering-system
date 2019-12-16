@@ -44,10 +44,8 @@ public class LunchController implements LunchControllerInterface {
         while (!listOfAvailableDishesId.contains(dishId)){
             dishId = Display.askForInt("Please input correct ID of dish");
         }
-        int amount = Display.askForInt("How many of those?");
-        OrderDish orderDish = new OrderDish();
-        orderDish.setDishId(dishId);
-        orderDish.setAmount(amount);
+        int amount = Display.askForInt("How many of those dishes?");
+        OrderDish orderDish = new OrderDish(dishId,amount);
         order.addOrderDishToListOfOrderedDishes(orderDish);
     }
     @Override
@@ -56,12 +54,10 @@ public class LunchController implements LunchControllerInterface {
         List<Integer> listOfAvailableDessertId = new ArrayList<>();
         addAllAvailableItemOrderIdFromMenuToList(listOfAvailableDessertId, menu.getListOfDesserts());
         while (!listOfAvailableDessertId.contains(dessertId)){
-            dessertId = Display.askForInt("Please input correct id of dessert");
+            dessertId = Display.askForInt("Please input correct ID of dessert");
         }
-        int amount = Display.askForInt("How many of those desserts do you want?");
-        OrderDessert orderDessert = new OrderDessert();
-        orderDessert.setDessertId(dessertId);
-        orderDessert.setAmount(amount);
+        int amount = Display.askForInt("How many of those desserts?");
+        OrderDessert orderDessert = new OrderDessert(dessertId,amount);
         order.addOrderDessertToListOfOrderedDesserts(orderDessert);
     }
 }

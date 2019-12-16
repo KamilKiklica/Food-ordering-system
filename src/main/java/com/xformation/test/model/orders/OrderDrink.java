@@ -6,14 +6,7 @@ import java.util.List;
 public class OrderDrink extends OrderMenuItem {
     private int drinkId;
     private int drinkIdentifier;
-    private List<OrderDrinkAdditive> listOfAdditives;
-
-    public OrderDrink(int drinkIdentifier, int drinkId, int amount) {
-        super(amount);
-        this.drinkId = drinkId;
-        this.drinkIdentifier = drinkIdentifier;
-        this.listOfAdditives = new ArrayList<>();
-    }
+    private List<OrderDrinkAdditive> listOfAdditives = new ArrayList<>();
 
     public OrderDrink(){
         super();

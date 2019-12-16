@@ -37,6 +37,7 @@ public class RootController implements RootControllerInterface {
                     break;
                 }
                 case 2: {
+                    Display.clearScreen();
                     showPendingOrders();
                     Display.pressButtonToContinue();
                     break;

@@ -62,7 +62,8 @@ public class TransactionQueriesBuilder {
         order.getListOfOrderedDrinks().
                 stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive ->
                 this.queriesList.add("insert into ordered_drinks_additive (Ordered_Drink_Id, Drink_Additive_Id) " +
-                        "values ((SELECT ordered_drinks.Id FROM ordered_drinks WHERE Drink_Identifier="+orderDrink.getDrinkIdentifier()+"),"
-                        +orderDrinkAdditive.getDrinkAdditiveId()+");")));
+                        "values ((SELECT ordered_drinks.Id FROM ordered_drinks WHERE Drink_Identifier="+
+                        orderDrink.getDrinkIdentifier()+" AND Order_Id = (SELECT Orders.Id FROM Orders WHERE ORDER_NUMBER="+
+                        order.getNumberOfOrder()+"))," +orderDrinkAdditive.getDrinkAdditiveId()+");")));
     }
 }

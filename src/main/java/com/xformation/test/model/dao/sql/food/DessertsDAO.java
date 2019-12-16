@@ -1,6 +1,7 @@
 package com.xformation.test.model.dao.sql.food;
 
 import com.xformation.test.model.dao.sql.DataSource;
+import com.xformation.test.model.dao.sql.food.interfaces.MenuItemDAOInterface;
 import com.xformation.test.model.food.Dessert;
 import com.xformation.test.model.food.MenuItem;
 
@@ -9,7 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DessertsDAO {
+public class DessertsDAO implements MenuItemDAOInterface {
+    @Override
     public List<MenuItem> read() {
         List<MenuItem> list = new ArrayList<>();
         try (ResultSet rs = new DataSource().executeQuery("SELECT * FROM DESSERTS;")) {
