@@ -3,8 +3,8 @@ package com.xformation.test.model.orders;
 public class OrderDessert extends OrderMenuItem{
     private int dessertId;
 
-    public OrderDessert(int id, int orderNumber,  int dessertId, int amount) {
-        super(id, orderNumber, amount);
+    public OrderDessert(int dessertId, int amount) {
+        super(amount);
         this.dessertId = dessertId;
     }
     public OrderDessert(){
@@ -12,9 +12,6 @@ public class OrderDessert extends OrderMenuItem{
     }
     public int getDessertId() {
         return this.dessertId;
-    }
-    public void setDessertId(int dessertId) {
-        this.dessertId = dessertId;
     }
 
 }

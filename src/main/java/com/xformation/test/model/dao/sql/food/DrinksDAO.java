@@ -1,6 +1,7 @@
 package com.xformation.test.model.dao.sql.food;
 
 import com.xformation.test.model.dao.sql.DataSource;
+import com.xformation.test.model.dao.sql.food.interfaces.MenuItemDAOInterface;
 import com.xformation.test.model.food.Drink;
 import com.xformation.test.model.food.MenuItem;
 
@@ -9,10 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrinksDAO{
-
+public class DrinksDAO implements MenuItemDAOInterface {
+    @Override
     public List<MenuItem> read() {
-
         List<MenuItem> list = new ArrayList<>();
         try (ResultSet rs = new DataSource().executeQuery("SELECT * FROM DRINKS;")) {
             while(rs.next()){
@@ -22,7 +22,6 @@ public class DrinksDAO{
                 MenuItem drink = new Drink(id,name,price);
                 list.add(drink);
             }
-
         } catch (SQLException e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);

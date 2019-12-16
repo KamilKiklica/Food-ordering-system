@@ -3,6 +3,7 @@ package com.xformation.test.controller;
 import com.xformation.test.controller.Interfaces.OrderControllerInterface;
 import com.xformation.test.model.Menu;
 import com.xformation.test.model.Order;
+import com.xformation.test.model.dao.sql.TransactionQueriesBuilder;
 import com.xformation.test.model.dao.sql.orders.*;
 import com.xformation.test.view.Display;
 
@@ -19,10 +20,10 @@ public class OrderController implements OrderControllerInterface {
 
 
 
-    public OrderController(Menu menu){
+    public OrderController(Menu menu, int maxAmountOfOrders){
         this.order = new Order();
         this.menu = menu;
-        this.maxAmountOfOrders=100;
+        this.maxAmountOfOrders = maxAmountOfOrders;
         this.lunchController = new LunchController(menu, order);
         this.drinkController = new DrinkController(menu,order);
     }
@@ -72,34 +73,22 @@ public class OrderController implements OrderControllerInterface {
     public void initializeNewOrder(Order newOrder) {
         try {
         generateRandomOrderNumberBasingOnCurrentAmountOfOrders(newOrder, this.maxAmountOfOrders);
-        int orderNumber = newOrder.getNumberOfOrder();
-        sendOrder(newOrder, orderNumber);
+        sendOrder(newOrder);
         } catch (Exception e) {
             System.out.println("The amount of orders at this moment reached maximum size. Please wait for service of other clients.");
         }
     }
     
-    private void sendOrder(Order order, int numberOfOrder){
-        setNumberOfOrderForAllOrderItems(order, numberOfOrder);
-        new OrderDAO().createNewOrder(order);
-        order.getListOfOrderedDishes().stream().forEach(orderDish -> new OrderDishDAO().createDishOrder(orderDish));
-        order.getListOfOrderedDesserts().stream().forEach(orderDessert -> new OrderDessertDAO().createDessertOrder(orderDessert));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> new OrderDrinkDAO().createDrinkOrder(orderDrink));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> new OrderDrinkAdditivesDAO().createDrinkAdditivesOrder(orderDrinkAdditive)));
-
-    }
-
-    private void setNumberOfOrderForAllOrderItems(Order order, int numberOfOrder) {
-        order.getListOfOrderedDishes().stream().forEach(orderDish -> orderDish.setOrderNumber(numberOfOrder));
-        order.getListOfOrderedDesserts().stream().forEach(orderDessert -> orderDessert.setOrderNumber(numberOfOrder));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.setOrderNumber(numberOfOrder));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> orderDrinkAdditive.setDrinkId(orderDrink.getDrinkId())));
-        order.getListOfOrderedDrinks().stream().forEach(orderDrink -> orderDrink.getListOfAdditives().stream().forEach(orderDrinkAdditive -> orderDrinkAdditive.setOrderNumber(numberOfOrder)));
+    private void sendOrder(Order order){
+        TransactionQueriesBuilder transactionQueriesBuilder = new TransactionQueriesBuilder(order);
+        transactionQueriesBuilder.makeQueriesFromOrder();
+        List<String> queries = transactionQueriesBuilder.getQueriesList();
+        new TransactionDAO().createWholeOrder(queries);
     }
 
     private void generateRandomOrderNumberBasingOnCurrentAmountOfOrders(Order order, int maxAmountOfOrders){
         Random rand = new Random();
-        List<Order> ordersList = new OrderDAO().read();
+        List<Order> ordersList = new OrderDAO().readListOfOrders();
         if (ordersList.size()==maxAmountOfOrders){
             throw new ArrayIndexOutOfBoundsException("Max amount of orders reached");
         } else {

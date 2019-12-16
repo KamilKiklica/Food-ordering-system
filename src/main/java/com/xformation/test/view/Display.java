@@ -157,7 +157,7 @@ public class Display {
 
     public static int printAllOrderedDrinkAdditives(Menu menu, int totalPrice, OrderDrink orderedDrink, int amountOfDrinks) {
         List<OrderDrinkAdditive> drinkAdditives = orderedDrink.getListOfAdditives();
-        if(orderedDrink.getListOfAdditives().size()>0) {
+        if(drinkAdditives.size()>0) {
             for (OrderDrinkAdditive orderedAdditive: drinkAdditives) {
                 int drinkAdditiveId = orderedAdditive.getDrinkAdditiveId();
                 for (MenuItem drinkAdditive : menu.getListOfDrinkAdditives()) {

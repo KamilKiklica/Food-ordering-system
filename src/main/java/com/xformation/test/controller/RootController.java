@@ -31,12 +31,13 @@ public class RootController implements RootControllerInterface {
 
                 case 1: {
                     Display.clearScreen();
-                    OrderController orderController = new OrderController(menu);
+                    OrderController orderController = new OrderController(menu,100);
                     orderController.run();
                     Display.pressButtonToContinue();
                     break;
                 }
                 case 2: {
+                    Display.clearScreen();
                     showPendingOrders();
                     Display.pressButtonToContinue();
                     break;
@@ -53,8 +54,13 @@ public class RootController implements RootControllerInterface {
     }
     @Override
     public void showPendingOrders(){
-        List<Order> list = new OrderDAO().read();
-        Display.showPendingOrders(list);
+        List<Order> list = new OrderDAO().readListOfOrders();
+        if (list.size()>0){
+            Display.showPendingOrders(list);
+        } else {
+            Display.printMessage("There is no orders at the moment.");
+
+        }
     }
     @Override
     public void printMenu() {

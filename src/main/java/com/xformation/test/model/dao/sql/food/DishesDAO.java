@@ -1,6 +1,7 @@
 package com.xformation.test.model.dao.sql.food;
 
 import com.xformation.test.model.dao.sql.DataSource;
+import com.xformation.test.model.dao.sql.food.interfaces.DishesDAOInterface;
 import com.xformation.test.model.food.Dish;
 import com.xformation.test.model.food.MenuItem;
 
@@ -9,10 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DishesDAO {
-
+public class DishesDAO implements DishesDAOInterface {
+    @Override
     public List<MenuItem> read(int cuisineId) {
-
         List<MenuItem> list = new ArrayList<>();
         try (ResultSet rs = new DataSource().executeQuery("SELECT * FROM DISHES WHERE CUISINE_ID=" + cuisineId + ";")) {
             while(rs.next()){
@@ -23,7 +23,6 @@ public class DishesDAO {
                 MenuItem dish = new Dish(id, name , price);
                 list.add(dish);
             }
-
         } catch (SQLException e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
