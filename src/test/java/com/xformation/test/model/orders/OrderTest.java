@@ -7,16 +7,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OrderTest {
-    Order order;
-    OrderDish dish;
-    OrderDessert dessert;
-    OrderDrink drink;
+    private Order order;
 
     @Before
     public void setUp() {
-        dish = new OrderDish();
-        dessert = new OrderDessert();
-        drink = new OrderDrink();
+        OrderDish dish = new OrderDish();
+        OrderDessert dessert = new OrderDessert();
+        OrderDrink drink = new OrderDrink();
+
         order = new Order();
         order.addOrderDishToListOfOrderedDishes(dish);
         order.addOrderDessertToListOfOrderedDesserts(dessert);
@@ -40,4 +38,6 @@ public class OrderTest {
         Assert.assertNotEquals(2, order.getListOfOrderedDrinks().size());
         Assert.assertEquals(1, order.getListOfOrderedDrinks().size());
     }
+
+
 }

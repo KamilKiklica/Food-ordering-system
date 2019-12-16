@@ -31,7 +31,7 @@ public class RootController implements RootControllerInterface {
 
                 case 1: {
                     Display.clearScreen();
-                    OrderController orderController = new OrderController(menu);
+                    OrderController orderController = new OrderController(menu,100);
                     orderController.run();
                     Display.pressButtonToContinue();
                     break;
@@ -55,7 +55,12 @@ public class RootController implements RootControllerInterface {
     @Override
     public void showPendingOrders(){
         List<Order> list = new OrderDAO().readListOfOrders();
-        Display.showPendingOrders(list);
+        if (list.size()>0){
+            Display.showPendingOrders(list);
+        } else {
+            Display.printMessage("There is no orders at the moment.");
+
+        }
     }
     @Override
     public void printMenu() {

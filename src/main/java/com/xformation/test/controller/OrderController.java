@@ -20,10 +20,10 @@ public class OrderController implements OrderControllerInterface {
 
 
 
-    public OrderController(Menu menu){
+    public OrderController(Menu menu, int maxAmountOfOrders){
         this.order = new Order();
         this.menu = menu;
-        this.maxAmountOfOrders=100;
+        this.maxAmountOfOrders = maxAmountOfOrders;
         this.lunchController = new LunchController(menu, order);
         this.drinkController = new DrinkController(menu,order);
     }

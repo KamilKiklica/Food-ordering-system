@@ -24,14 +24,14 @@ public class TransactionQueriesBuilder {
 
     private void prepareQueryList(Order order) {
         int numberOfOrder = order.getNumberOfOrder();
-        addNewOrderQuery(order,numberOfOrder);
+        addNewOrderQuery(numberOfOrder);
         addQueriesForOrderDishes(order, numberOfOrder);
         addQueriesForOrderDesserts(order, numberOfOrder);
         addQueriesForOrderDrinks(order, numberOfOrder);
         addQueriesForOrderDrinkAdditives(order);
     }
 
-    private void addNewOrderQuery(Order order, int numberOfOrder) {
+    private void addNewOrderQuery(int numberOfOrder) {
         this.queriesList.add("insert into orders (Order_Number) values ("+numberOfOrder+");");
     }
     private void addQueriesForOrderDishes(Order order, int numberOfOrder) {
