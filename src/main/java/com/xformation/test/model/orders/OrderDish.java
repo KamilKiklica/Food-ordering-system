@@ -12,7 +12,4 @@ public class OrderDish extends OrderMenuItem{
     public int getDishId() {
         return dishId;
     }
-    public void setDishId(int dishId) {
-        this.dishId = dishId;
-    }
 }

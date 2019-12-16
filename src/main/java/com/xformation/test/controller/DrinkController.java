@@ -76,7 +76,7 @@ public class DrinkController implements DrinkControllerInterface {
         List<Integer> listOfAvailableDrinkAdditivesId = new ArrayList<>();
         addAllAvailableItemOrderIdFromMenuToList(listOfAvailableDrinkAdditivesId, menu.getListOfDrinkAdditives());
         int drinkAdditiveId = checkIfItemIdExistsInListOfItems(listOfAvailableDrinkAdditivesId, "Select ID of Drink Additive:", "Please input correct id of Drink Additive");
-        OrderDrinkAdditive orderDrinkAdditive = new OrderDrinkAdditive(drinkAdditiveId,orderDrink.getDrinkIdentifier());
+        OrderDrinkAdditive orderDrinkAdditive = new OrderDrinkAdditive(drinkAdditiveId);
         listOfDrinkAdditivesForCurrentDrink.add(orderDrinkAdditive);
         orderDrink.setListOfAdditives(listOfDrinkAdditivesForCurrentDrink);
 
